@@ -76,7 +76,7 @@ var Hand = (function () {
         // cardGroupsValues is sorted, so use the difference between the first and last card to determine a straight
         if(cardGroupsValues[4] - cardGroupsValues[0] === 4) { return true; } // implicit conversion from string to number
 
-        /* if the lowest card is a 2, this may be a straight with a low ace, check the difference between the
+        /* if the lowest card is a 2, this may be a straight with a low ace, so check the difference between the
            lowest and second-highest card instead of the difference betwen the lowest and highest (the ace) */
         if(cardGroupsValues[0] == 2) { // use loose equality because the elements of cardGroupsValues are strings
             console.log(`cardGroupsValues[3]: ${cardGroupsValues[3]} cardGroupsValues[0]: ${cardGroupsValues[0]}`);

@@ -6,9 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jacks or Better</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="site.css">    
 </head>
 <body>
+    <div id="bg-image">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="hand-outcome-notif">
+                        <h1>WELCOME</h1>
+                    </div>
+                    <div id="cards-div">
+                        <img class="card" id="cardImage1" src="img/back.png">
+                        <img class="card" id="cardImage2" src="img/back.png">
+                        <img class="card" id="cardImage3" src="img/back.png">
+                        <img class="card" id="cardImage4" src="img/back.png">
+                        <img class="card" id="cardImage5" src="img/back.png">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div id="account-div">
+                        <h3>CREDITS: </h3>
+                        <h3 id="account">1000</h3>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div id="account-div">
+                        <button id="deal-btn" class="btn btn-lg btn-primary" disabled="true" type="button">DEAL</button>
+                        <div class="input-group">
+                            <span class="input-group-addon">BET</span>
+                            <input type="number" id="bet-amount" value="10" min="1" max="50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="card.js"></script>
     <script src="hand.js"></script>    
