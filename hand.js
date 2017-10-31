@@ -30,6 +30,7 @@ var Hand = (function () {
                 }
                 else return { handType: "Flush", multiplier: 7 }
             }
+
             else if(isStraight(cardGroups)) return { handType: "Straight", multiplier: 5 }
 
             // player just has a high card
@@ -55,8 +56,8 @@ var Hand = (function () {
     }
         
     function isRoyalFlush(cardGroups) {
-        // is it a straight flush, and is the low card a 10?
-        return Object.getOwnPropertyNames(cardGroups)[0] === 10;
+        // is the hand a straight flush, and is the low card a 10?
+        return Object.getOwnPropertyNames(cardGroups)[0] == 10;
     }
 
     function isFlush(cards) {
@@ -71,35 +72,18 @@ var Hand = (function () {
         let cardGroupsValues = Object.getOwnPropertyNames(cardGroups);
 
         console.log("Object.getOwnPropertyNames(cardGroups): ", Object.getOwnPropertyNames(cardGroups));        
-        console.log("Object.entries(cardGroups): ", Object.entries(cardGroups));
 
-        if(cardGroupsValues[0] === 2) { // if the lowest card is a 2, this may be a straight with a low ace, so...
-            cardGroupsValues.some(cardValue => {
-                console.log("First element of cardGroupsValues is a 2");
-                if(cardValue === 14) { // ...set ace value to 1 instead of 14 
-                    cardValue = 1;
-                    console.log("Set ace value to ", cardValue);
-                }
-            })
+        // cardGroupsValues is sorted, so use the difference between the first and last card to determine a straight
+        if(cardGroupsValues[4] - cardGroupsValues[0] === 4) { return true; } // implicit conversion from string to number
+
+        /* if the lowest card is a 2, this may be a straight with a low ace, check the difference between the
+           lowest and second-highest card instead of the difference betwen the lowest and highest (the ace) */
+        if(cardGroupsValues[0] == 2) { // use loose equality because the elements of cardGroupsValues are strings
+            console.log(`cardGroupsValues[3]: ${cardGroupsValues[3]} cardGroupsValues[0]: ${cardGroupsValues[0]}`);
+            if(cardGroupsValues[3] - cardGroupsValues[0] === 3) { return true; }
         }
 
-        // idea for alternative approach: use the difference between the first and last card to determine a straight, since cardGroups is sorted
-        // for aces, use the difference between the first card and the second-to-last card
-        for(let i = 1; i < cardGroupsValues.length; i++) {
-            if(cardGroupsValues[i] !== (cardGroupsValues[i - 1] - 1)) {
-                console.log(`cardGroupsValues[i]: ${cardGroupsValues[i]} cardGroupsValues[i - 1]: ${cardGroupsValues[i + 1] - 1}`);
-                return false;
-            }
-        }
-
-        console.log("Returning true for isStraight");
-        return true;
-
-        /*return (cardGroupsValues.forEach(group => {
-            // check if elements of cardGroupsValues are consecutive values
-            if(temp !== group) return false
-            temp = group;            
-        }));*/
+        return false;
     }
 
     function isTwoPairOrFullHouse(cardGroups) {
@@ -109,7 +93,7 @@ var Hand = (function () {
         return Object.values(cardGroups).some(numCardsInCardGroup => {
             console.log("numCardsInCardGroup: ", numCardsInCardGroup);
             return numCardsInCardGroup === 2;
-        })
+        });
     }
 
     function isJacksOrBetter(cardGroups) {
