@@ -11,8 +11,8 @@
 </head>
 <body>
     <div id="bg-image">
-        <div class="container text-center">
-            <div class="row">
+        <div class="container">
+            <div class="row text-center">
                 <div class="col-xs-12">
                     <div id="hand-outcome-notif">
                         <h1>WELCOME</h1>
@@ -27,18 +27,22 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-4 text-center">
                     <div id="account-div">
-                        <h3>CREDITS: </h3>
+                        <h3>CREDITS</h3>
                         <h3 id="account">1000</h3>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                    <div id="account-div">
-                        <button id="deal-btn" class="btn btn-lg btn-primary" disabled="true" type="button">DEAL</button>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <div id="deal-div">
+                        <button id="deal-btn" type="button" class="btn btn-lg btn-primary" title="Please set your bet amount first." disabled="true" >DEAL</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div id="bet-div">
                         <div class="input-group">
                             <span class="input-group-addon">BET</span>
-                            <input type="number" id="bet-amount" value="10" min="1" max="50">
+                            <input type="number" id="bet-amount" title="The minimum bet is 1 credit." value="0" min="1" max="50">
                         </div>
                     </div>
                 </div>

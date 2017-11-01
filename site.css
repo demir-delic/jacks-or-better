@@ -17,22 +17,25 @@ html, body, #bg-image {
     background-size: cover;
 }
 
+#account-div, #bet-div, #deal-div {
+    margin-bottom: 20px;
+}
+
 .card {
     height: 200px;
-    margin-bottom: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 20px 10px 30px 10px;
 }
 
 .input-group {
     font-size: 16px;
     color: #333333;
-    margin: 10px;
+    margin-top: 15px;
     padding: 0px;
 }
 
-#account {
+h3 {
     margin-top: 0px;
+    margin-bottom: 3px;
 }
 
 @media (max-width: 480px) {
