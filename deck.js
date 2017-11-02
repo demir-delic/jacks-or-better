@@ -28,14 +28,14 @@ var Deck = (function () {
     };
 
     Deck.prototype.deal = function (numCards) {
-        numCards = numCards || 1;
+        numCards = numCards || 0;
         
         let newCards = this.cards.splice(0, numCards);
 
         return newCards.map(item => {
             return new Card(item);
         })
-    }
+    };
     
     return Deck;
 

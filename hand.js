@@ -6,13 +6,13 @@ var Hand = (function () {
 
     Hand.prototype.addCards = function(cardsToAdd) {
         this.cards = this.cards.concat(cardsToAdd);
-    }
+    };
 
     Hand.prototype.removeCards = function(names) {
         this.cards = this.cards.filter(item => {
             return !names.includes(item.name);
         });
-    }
+    };
 
     Hand.prototype.getBestHand = function() {
         let cardGroups = getGroups(this.cards);
@@ -53,7 +53,7 @@ var Hand = (function () {
             // 4 of a Kind is true by default if there are 2 card groups and isFullHouse returns false               
             else return { handType: "4 of a Kind", multiplier: 40 }
         }
-    }
+    };
         
     function isRoyalFlush(cardGroups) {
         // is the hand a straight flush, and is the low card a 10?
@@ -77,7 +77,7 @@ var Hand = (function () {
         if(cardGroupsValues[4] - cardGroupsValues[0] === 4) { return true; } // implicit conversion from string to number
 
         /* if the lowest card is a 2, this may be a straight with a low ace, so check the difference between the
-           lowest and second-highest card instead of the difference betwen the lowest and highest (the ace) */
+           lowest and second-highest card instead of the difference between the lowest and highest (the ace) */
         if(cardGroupsValues[0] == 2) { // use loose equality because the elements of cardGroupsValues are strings
             console.log(`cardGroupsValues[3]: ${cardGroupsValues[3]} cardGroupsValues[0]: ${cardGroupsValues[0]}`);
             if(cardGroupsValues[3] - cardGroupsValues[0] === 3) { return true; }

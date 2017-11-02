@@ -28,14 +28,14 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-4 text-center">
-                    <div id="account-div">
+                    <div id="credits-div">
                         <h3>CREDITS</h3>
-                        <h3 id="account">1000</h3>
+                        <h3 id="credits">1000</h3>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4 text-center">
                     <div id="deal-div">
-                        <button id="deal-btn" type="button" class="btn btn-lg btn-primary" title="Please set your bet amount first." disabled="true" >DEAL</button>
+                        <button id="deal-btn" type="button" class="btn btn-lg btn-primary disabled" title="Please set your bet amount first." >DEAL</button>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
@@ -55,7 +55,14 @@
     <script src="hand.js"></script>    
     <script src="deck.js"></script>
     <script src="player.js"></script>
-    <script src="game.js"></script>   
+    <script src="game.js"></script>
+    <script>
+        let game = new Game(1000, true);
+        //game.hand = new Hand(game.deck.deal(5));
+        //console.log("hand: ", game.hand);
+
+        game.setUp();
+    </script>  
      
 </body>
 </html>
