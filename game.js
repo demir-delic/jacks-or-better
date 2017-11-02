@@ -17,7 +17,7 @@ var Game = (function () {
             this.deal();
         });
 
-        betAmount.addEventListener("onclick", function () {
+        betAmount.addEventListener("click", function () {
             if(betAmount.value > 0) {
                 dealBtn.classList.remove("disabled");
                 dealBtn.title = "";
