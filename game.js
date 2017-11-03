@@ -4,6 +4,7 @@ var Game = (function () {
         this.player = new Player(balance);
         this.deck = new Deck(shuffleNow);
         this.hand = new Hand();
+        this.newHand = true;
     }
 
     Game.prototype.setUp = function() {
@@ -23,13 +24,13 @@ var Game = (function () {
             }
         });
 
-        let cardImages = [];        
+        let cardImages = [];
 
         for(let i = 0; i < 5; i++) {
             cardImages[i] = document.getElementById(`cardImage${i + 1}`);
 
             cardImages[i].addEventListener("click", () => {
-                this.hold(cardImages[i], dealBtn.textContent === "DRAW");
+                this.hold(cardImages[i], this.newHand);
             });
         }
     };
@@ -40,7 +41,7 @@ var Game = (function () {
 
         var deck = new Deck(true);
 
-        if(dealBtn.textContent === "DEAL") { // this is a new hand
+        if(this.newHand) { // this is a new hand
             this.player.updateAccount(-betAmount.value);
 
             // deal 5 cards from deck into hand
@@ -54,7 +55,7 @@ var Game = (function () {
             /*this.hand.forEach(card => {
                 card.name
             });*/
-            
+            this.newHand = false;
         }
         else { // this is not a new hand
 
@@ -62,7 +63,7 @@ var Game = (function () {
 
             dealBtn.textContent = "DEAL";
             betAmount.removeAttribute("disabled");
-            
+            this.newHand = true;
         }
 
         // update card images
@@ -73,8 +74,8 @@ var Game = (function () {
 
     }
 
-    Game.prototype.hold = function(card, gameIsInDrawPhase) { // card should be the CSS ID of the image that should be held
-        if(gameIsInDrawPhase) {
+    Game.prototype.hold = function(card, newHand) { // card should be the CSS ID of the image that should be held
+        if(!newHand) {
             card.classList.toggle("hold");
         }
     };
