@@ -34,12 +34,12 @@ var Hand = (function () {
             else if(isStraight(cardGroups)) return { handType: "Straight", multiplier: 5 }
 
             // player just has a high card
-            else return { handType: "Busted", multiplier: 0 }
+            else return { handType: "High Card (Busted)", multiplier: 0 }
         }
         else if(numCardGroups === 4) { // there is a pair; isJacksOrBetter checks if the pair is strong enough
-            if(isJacksOrBetter(cardGroups)) return { handType: "1 Pair", multiplier: 1 }
+            if(isJacksOrBetter(cardGroups)) return { handType: "1 Pair, Jacks or Better", multiplier: 1 }
 
-            else return { handType: "Busted", multiplier: 0 }
+            else return { handType: "1 Pair, Not Jacks or Better (Busted)", multiplier: 0 }
         }
         else if(numCardGroups === 3) {
             if(isTwoPairOrFullHouse(cardGroups)) return { handType: "2 Pair", multiplier: 2 }

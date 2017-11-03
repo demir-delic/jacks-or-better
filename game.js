@@ -38,7 +38,7 @@ var Game = (function () {
         let betInput = document.getElementById("bet-input");
         let notification = document.getElementById("hand-outcome-notif")
         notification.classList.remove("alert", "alert-danger");
-        notification.textContent = "VIDEO POKER"        
+        notification.textContent = "GOOD LUCK"        
 
         if(this.newHand) { // this is a new hand
 
@@ -87,7 +87,10 @@ var Game = (function () {
             }
 
 
-            this.hand.getBestHand();
+            let bestHand = this.hand.getBestHand();
+
+            notification.textContent = bestHand.handType;
+            this.player.updateAccount(betInput.value * bestHand.multiplier);
 
             dealBtn.textContent = "DEAL";
             betInput.removeAttribute("disabled");
