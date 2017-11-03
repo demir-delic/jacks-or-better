@@ -5,64 +5,72 @@ var Game = (function () {
         this.deck = new Deck(shuffleNow);
         this.hand = new Hand();
         this.newHand = true;
+        this.cardImages = document.getElementById("cards-div").children;
+        console.log(this.cardImages);
     }
 
     Game.prototype.setUp = function() {
         let dealBtn = document.getElementById("deal-btn");
-        let betAmount = document.getElementById("bet-amount");
+        let betInput = document.getElementById("bet-input");
 
         dealBtn.addEventListener("click", () => {
-            betAmount.setAttribute("disabled", "true");
-            betAmount.title = "";
+            betInput.setAttribute("disabled", "true");
+            betInput.title = "";
             this.deal();
         });
 
-        betAmount.addEventListener("click", function () {
-            if(betAmount.value > 0) {
+        betInput.addEventListener("click", function () {
+            if(betInput.value > 0) {
                 dealBtn.classList.remove("disabled");
                 dealBtn.title = "";
             }
         });
 
-        let cardImages = [];
-
-        for(let i = 0; i < 5; i++) {
-            cardImages[i] = document.getElementById(`cardImage${i + 1}`);
-
-            cardImages[i].addEventListener("click", () => {
-                this.hold(cardImages[i], this.newHand);
+        for(let i = 0; i < this.cardImages.length; i++) {
+            this.cardImages[i].addEventListener("click", () => {
+                this.hold(this.cardImages[i], this.newHand);
             });
         }
     };
 
     Game.prototype.deal = function() {
         let dealBtn = document.getElementById("deal-btn");
-        let betAmount = document.getElementById("bet-amount");
-
-        var deck = new Deck(true);
+        let betInput = document.getElementById("bet-input");
 
         if(this.newHand) { // this is a new hand
-            this.player.updateAccount(-betAmount.value);
+
+            for(let i = 0; i < this.cardImages.length; i++) {
+                this.cardImages[i].classList.remove("hold");
+            }
+
+            this.player.updateAccount(-betInput.value);
 
             // deal 5 cards from deck into hand
-            this.hand = new Hand(deck.deal(5));
+            this.hand = new Hand(this.deck.deal(5));
             console.log(this.hand);
 
             dealBtn.textContent = "DRAW";
 
-            
+            for(let i = 0; i < this.cardImages.length; i++) {
+                console.log(this.cardImages[i])
+                console.log(this.hand.cards[i].name);
+                this.cardImages[i].src=`img/${this.hand.cards[i].name}.png`;
+            }
 
             /*this.hand.forEach(card => {
                 card.name
             });*/
+
             this.newHand = false;
         }
         else { // this is not a new hand
 
-            // this.hand.forEach
+
+
+            this.hand.getBestHand();
 
             dealBtn.textContent = "DEAL";
-            betAmount.removeAttribute("disabled");
+            betInput.removeAttribute("disabled");
             this.newHand = true;
         }
 
