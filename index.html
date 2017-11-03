@@ -14,9 +14,10 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-xs-12">
-                    <div id="hand-outcome-notif">
-                        <h1>WELCOME</h1>
+                    <div>
+                        <h1 id="hand-outcome-notif">WELCOME TO VIDEO POKER - GOOD LUCK</h1>
                     </div>
+
                     <div id="cards-div">
                         <img class="card" id="cardImage1" src="img/back.png">
                         <img class="card" id="cardImage2" src="img/back.png">
@@ -58,8 +59,6 @@
     <script src="game.js"></script>
     <script>
         let game = new Game(1000, true);
-        //game.hand = new Hand(game.deck.deal(5));
-        //console.log("hand: ", game.hand);
 
         game.setUp();
     </script>  
