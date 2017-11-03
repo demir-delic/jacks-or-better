@@ -10,9 +10,8 @@ var Game = (function () {
         let dealBtn = document.getElementById("deal-btn");
         let betAmount = document.getElementById("bet-amount");
 
-        console.log("Inside setUp");
         dealBtn.addEventListener("click", () => {
-            betAmount.classList.add("disabled");
+            betAmount.setAttribute("disabled", "true");
             betAmount.title = "";
             this.deal();
         });
@@ -24,54 +23,60 @@ var Game = (function () {
             }
         });
 
-        console.log("End of setUp");
+        let cardImages = [];        
+
+        for(let i = 0; i < 5; i++) {
+            cardImages[i] = document.getElementById(`cardImage${i + 1}`);
+
+            cardImages[i].addEventListener("click", () => {
+                this.hold(cardImages[i], dealBtn.textContent === "DRAW");
+            });
+        }
     };
 
     Game.prototype.deal = function() {
         let dealBtn = document.getElementById("deal-btn");
         let betAmount = document.getElementById("bet-amount");
-        //let cardsOnTable = [].slice.call(document.getElementsByClassName("card"));
-        //console.log(cardsOnTable);
 
-
-        var deck = new Deck(true);        
+        var deck = new Deck(true);
 
         if(dealBtn.textContent === "DEAL") { // this is a new hand
             this.player.updateAccount(-betAmount.value);
 
             // deal 5 cards from deck into hand
             this.hand = new Hand(deck.deal(5));
-
             console.log(this.hand);
 
             dealBtn.textContent = "DRAW";
 
-            //for(let i = 0; ) {
-                
-            //}
+            
+
+            /*this.hand.forEach(card => {
+                card.name
+            });*/
             
         }
         else { // this is not a new hand
 
-        }
-        
-        
-        let playerCredits = document.getElementById("credits")
-        if(playerCredits) {
+            // this.hand.forEach
 
-        }
+            dealBtn.textContent = "DEAL";
+            betAmount.removeAttribute("disabled");
             
+        }
+
         // update card images
 
         // calculate winnings
 
         // update the player account
 
-
     }
 
-    Game.prototype.hold = function(name) { // name should be the CSS ID of the image that should be held
-        name.classList.toggle("hold");
+    Game.prototype.hold = function(card, gameIsInDrawPhase) { // card should be the CSS ID of the image that should be held
+        if(gameIsInDrawPhase) {
+            card.classList.toggle("hold");
+        }
     };
 
     return Game;
