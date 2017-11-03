@@ -18,9 +18,6 @@ var Hand = (function () {
         let cardGroups = getGroups(this.cards);
         let numCardGroups = Object.getOwnPropertyNames(cardGroups).length;
 
-        console.log("cardGroups ", cardGroups);
-        console.log("numCardGroups: ", numCardGroups);
-
         if(numCardGroups === 5) {
             if(isFlush(this.cards)) {
                 if(isStraight(cardGroups)){ // isStraightFlush
@@ -68,10 +65,7 @@ var Hand = (function () {
     }
 
     function isStraight(cardGroups) {
-        console.log("Entered isStraight");
-        let cardGroupsValues = Object.getOwnPropertyNames(cardGroups);
-
-        console.log("Object.getOwnPropertyNames(cardGroups): ", Object.getOwnPropertyNames(cardGroups));        
+        let cardGroupsValues = Object.getOwnPropertyNames(cardGroups);      
 
         // cardGroupsValues is sorted, so use the difference between the first and last card to determine a straight
         if(cardGroupsValues[4] - cardGroupsValues[0] === 4) { return true; } // implicit conversion from string to number
@@ -79,7 +73,6 @@ var Hand = (function () {
         /* if the lowest card is a 2, this may be a straight with a low ace, so check the difference between the
            lowest and second-highest card instead of the difference between the lowest and highest (the ace) */
         if(cardGroupsValues[0] == 2) { // use loose equality because the elements of cardGroupsValues are strings
-            console.log(`cardGroupsValues[3]: ${cardGroupsValues[3]} cardGroupsValues[0]: ${cardGroupsValues[0]}`);
             if(cardGroupsValues[3] - cardGroupsValues[0] === 3) { return true; }
         }
 
@@ -87,25 +80,20 @@ var Hand = (function () {
     }
 
     function isTwoPairOrFullHouse(cardGroups) {
-        // check whether any of the card groups have 2 cards
-        console.log("Object.values(cardGroups): ", Object.values(cardGroups));        
+        // check whether any of the card groups have 2 cards  
         
         return Object.values(cardGroups).some(numCardsInCardGroup => {
-            console.log("numCardsInCardGroup: ", numCardsInCardGroup);
             return numCardsInCardGroup === 2;
         });
     }
 
     function isJacksOrBetter(cardGroups) {
         // check whether the card group with 2 cards has a value > 10
-        console.log("Object.entries(cardGroups): ", Object.entries(cardGroups));
 
         return Object.entries(cardGroups).some(keyValuePair => {
-            console.log("keyValuePair: ", keyValuePair);
             
             if(keyValuePair[1] === 2) { // if card group has 2 cards...
                 if(keyValuePair[0] > 10) { // ...check whether that card group is for a Jack or better
-                    console.log("Successful keyValuePair: ", keyValuePair);
                     return true;
                 }
             }
