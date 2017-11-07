@@ -37,7 +37,7 @@ var Game = (function () {
         let dealBtn = document.getElementById("deal-btn");
         let betInput = document.getElementById("bet-input");
         let notification = document.getElementById("hand-outcome-notif")
-        notification.classList.remove("alert", "alert-danger");
+        notification.classList.remove("alert-danger");
         notification.textContent = "GOOD LUCK"        
         
         if(this.newHand) { // this is a new hand
