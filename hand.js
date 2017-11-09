@@ -4,16 +4,6 @@ var Hand = (function () {
         this.cards = cards || [];
     }
 
-    Hand.prototype.addCards = function(cardsToAdd) {
-        this.cards = this.cards.concat(cardsToAdd);
-    };
-
-    Hand.prototype.removeCards = function(names) {
-        this.cards = this.cards.filter(item => {
-            return !names.includes(item.name);
-        });
-    };
-
     Hand.prototype.getBestHand = function() {
         let cardGroups = getGroups(this.cards);
         let numCardGroups = Object.getOwnPropertyNames(cardGroups).length;
@@ -90,10 +80,10 @@ var Hand = (function () {
     function isJacksOrBetter(cardGroups) {
         // check whether the card group with 2 cards has a value > 10
 
-        return Object.entries(cardGroups).some(keyValuePair => {
+        return Object.entries(cardGroups).some(valueGroupPair => {
             
-            if(keyValuePair[1] === 2) { // if card group has 2 cards...
-                if(keyValuePair[0] > 10) { // ...check whether that card group is for a Jack or better
+            if(valueGroupPair[1] === 2) { // if card group has 2 cards...
+                if(valueGroupPair[0] > 10) { // ...check whether that card group is for a Jack or better
                     return true;
                 }
             }
